@@ -4,12 +4,12 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 const NewsCard = ({ item }) => {
     return (
         <View style={styles.card}>
-            <Image source={{ uri: item.image }} style={styles.cardImage} />
             <View style={styles.cardContent}>
                 <Text style={styles.headline}>{item.headline}</Text>
                 <Text style={styles.summary}>{item.summary}</Text>
                 <Text style={styles.source}>{item.source} | {item.date}</Text>
             </View>
+         <Image source={{ uri: item.image }} style={styles.cardImage} />
         </View>
     );
 };

@@ -1,9 +1,12 @@
 import React from "react";
-import { StatusBar, FlatList, View, Text, Image, StyleSheet } from 'react-native';
-import SearchBar from './app/components/SearchBar';
+import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
+// import SearchBar from './app/components/SearchBar';
 import Screen from "./app/components/Screen";
 import NewsCard from './app/components/NewsCard';
 import HorizontalMenu from "./app/components/HorizontalMenu";
+import { NavigationContainer } from "@react-navigation/native";
+import BottomTab from "./app/components/BottomTab";
+
 
 const DATA = [
   {
@@ -57,16 +60,11 @@ export default function App() {
   );
 
   return (
-    <Screen>
-      <SearchBar />
-      {renderHeader()}
-      <HorizontalMenu />
-      <FlatList
-        data={DATA}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => <NewsCard item={item} />}
-      />
-    </Screen>
+    <>
+    <NavigationContainer>
+      <BottomTab renderHeader={renderHeader} data={DATA} />
+    </NavigationContainer>
+    </>
   );
 }
 
