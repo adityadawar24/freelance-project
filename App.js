@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
+import { FlatList, View, Text, Image, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 // import SearchBar from './app/components/SearchBar';
 import Screen from "./app/components/Screen";
 import NewsCard from './app/components/NewsCard';
@@ -26,12 +26,17 @@ export default function App() {
     fetchNews();
   },[]);
 
+  const openArticle = (url) => {
+    Linking.openURL(url);
+  };
 
   const renderHeader = () => (
+    <TouchableOpacity onPress={() => openArticle(news[0]?.url)}>
     <View style={styles.newsCard}>
       <Image source={{ uri: news[0]?.image }} style={styles.newsImage} />
       <Text style={styles.newsHeadline}>{news[0]?.title}</Text>
     </View>
+    </TouchableOpacity>
   );
 
   return (
