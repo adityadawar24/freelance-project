@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Linking  } from 'react-native';
 
 const NewsCard = ({ item }) => {
   // const formatDate = (dateString) => {
@@ -10,8 +10,12 @@ const NewsCard = ({ item }) => {
   //   return `${day}/${month}/${year}`;
   // };
 
+  const openArticle =()=>{
+    Linking.openURL(item.url);
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={openArticle}>
       <View style={styles.content}>
         <Text style={styles.headline}>{item.title}</Text>
         <Text style={styles.summary} numberOfLines={2}>
@@ -23,7 +27,7 @@ const NewsCard = ({ item }) => {
         </View>
       </View>
       <Image source={{ uri: item.image }} style={styles.image} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
