@@ -1,50 +1,60 @@
-import React from "react";
-import { View, StyleSheet, Text, Image } from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
 const NewsCard = ({ item }) => {
-    return (
-        <View style={styles.card}>
-            <View style={styles.cardContent}>
-                <Text style={styles.headline}>{item.headline}</Text>
-                <Text style={styles.summary}>{item.summary}</Text>
-                <Text style={styles.source}>{item.source} | {item.date}</Text>
-            </View>
-         <Image source={{ uri: item.image }} style={styles.cardImage} />
+  return (
+    <View style={styles.container}>
+      <Image source={{ uri: item.image }} style={styles.image} />
+      <View style={styles.content}>
+        <Text style={styles.headline}>{item.title}</Text>
+        <Text style={styles.summary}>{item.description}</Text>
+        <View style={styles.meta}>
+          <Text style={styles.source}>{item.author}</Text>
+          <Text style={styles.date}>{item.published ? new Date(item.published).toLocaleDateString() : ''}</Text>
         </View>
-    );
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    card: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderRadius: 8,
-        marginBottom: 10,
-        padding: 10
-    },
-    cardImage: {
-        width: 50,
-        height: 50,
-        borderRadius: 8
-    },
-    cardContent: {
-        flex: 1,
-        marginLeft: 10
-    },
-    headline: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        marginBottom: 5
-    },
-    summary: {
-        fontSize: 10,
-        marginBottom: 5
-    },
-    source: {
-        fontSize: 8,
-        color: 'grey'
-    },
+  container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 8,
+    marginBottom: 10,
+    overflow: 'hidden',
+  },
+  image: {
+    width: 100,
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  content: {
+    flex: 1,
+    padding: 15,
+  },
+  headline: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  summary: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  meta: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  source: {
+    fontSize: 14,
+    color: 'grey',
+  },
+  date: {
+    fontSize: 14,
+    color: 'grey',
+  },
 });
 
 export default NewsCard;

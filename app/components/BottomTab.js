@@ -7,11 +7,13 @@ import ProfileScreen from './ProfileScreen';
 import Screen from './Screen';
 import NewsCard from './NewsCard';
 import HorizontalMenu from './HorizontalMenu';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet, View, Text } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = ({ renderHeader, data }) => {
+  const latestNews = data.slice(1, 6);
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -48,9 +50,14 @@ const BottomTab = ({ renderHeader, data }) => {
             {renderHeader()}
             <HorizontalMenu />
             <FlatList
-              data={data}
+              data={latestNews}
               keyExtractor={item => item.id}
               renderItem={({ item }) => <NewsCard item={item} />}
+              ListHeaderComponent={() => (
+                <View style={styles.newsListHeader}>
+                  <Text style={styles.newsListTitle}>Latest News</Text>
+                </View>
+              )}
             />
           </Screen>
         )}
@@ -60,5 +67,17 @@ const BottomTab = ({ renderHeader, data }) => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  newsListHeader: {
+    backgroundColor: '#e3e3e3',
+    padding: 10,
+    marginBottom: 10,
+  },
+  newsListTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
   
 export default BottomTab;
