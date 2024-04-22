@@ -2,17 +2,27 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
 const NewsCard = ({ item }) => {
+  // const formatDate = (dateString) => {
+  //   const date = new Date(dateString);
+  //   const day = date.getDate().toString().padStart(2, '0');
+  //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  //   const year = date.getFullYear();
+  //   return `${day}/${month}/${year}`;
+  // };
+
   return (
     <View style={styles.container}>
-      <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.headline}>{item.title}</Text>
-        <Text style={styles.summary}>{item.description}</Text>
+        <Text style={styles.summary} numberOfLines={2}>
+          {item.description}
+        </Text>
         <View style={styles.meta}>
           <Text style={styles.source}>{item.author}</Text>
-          <Text style={styles.date}>{item.published ? new Date(item.published).toLocaleDateString() : ''}</Text>
+          {/* <Text style={styles.date}>{formatDate(item.published)}</Text> */}
         </View>
       </View>
+      <Image source={{ uri: item.image }} style={styles.image} />
     </View>
   );
 };
@@ -27,32 +37,35 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    height: '100%',
+    height: 75,
+    borderRadius : 8,
     resizeMode: 'cover',
+    marginTop: 12,
+    marginRight : 5,
   },
   content: {
     flex: 1,
-    padding: 15,
+    padding: 10,
   },
   headline: {
-    fontSize: 18,
+    fontSize: 13,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   summary: {
-    fontSize: 16,
-    marginBottom: 10,
+    fontSize: 9,
+    marginBottom: 5,
   },
   meta: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   source: {
-    fontSize: 14,
+    fontSize: 9,
     color: 'grey',
   },
   date: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'grey',
   },
 });
